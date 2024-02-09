@@ -1,3 +1,4 @@
+
 const express = require('express')
 const mysql = require('mysql2/promise')
 const app = express()
@@ -39,3 +40,4 @@ app.post('/customers', async (req, res)=>{
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+

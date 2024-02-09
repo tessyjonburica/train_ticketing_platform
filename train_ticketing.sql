@@ -3,25 +3,67 @@ CREATE TABLE IF NOT EXISTS customers(
     `surname` VARCHAR(255) NOT NULL,
     `firstName` VARCHAR(255) NOT NULL,
     `email`  VARCHAR(255),
-    `phone` CHAR(20),
+
+    `phone` VARCHAR(225),
     `gender` ENUM('Male','Female') DEFAULT 'Male',
-    `dateOfBirth` DATE,
-    `nin` VARCHAR(255),
+    `dob` DATE,
     `password` VARCHAR(255) NOT NULL,
-    `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    `nin` VARCHAR(25),
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
 
 CREATE TABLE IF NOT EXISTS schedules(
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
-    `distance` FLOAT,
-    `stationId` INT, FOREIGN KEY (`stationId`) REFERENCES stations(id),
-    `arrivalTime` TIMESTAMP,
-    `departureTime` TIMESTAMP,
+
+    `distance` FLOAT(2), 
+    `stationsId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (stationsId) REFERENCES stations(id),
+    `arrivalTime` TIMESTAMP NOT NULL,
+    `departureTime` TIMESTAMP NOT NULL DEFAULT '2024-02-09 12:00:00',
+
+   
     `departureStation` VARCHAR(255),
     `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS fares(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `passengerType` ENUM('Adult', 'Child') NOT NULL,
+    `travelClassId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (travelClassId) REFERENCES travelClass(id),
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS bookedSeats(
+   `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `bookingsId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (bookingsId) REFERENCES bookings(id),
+    `seatsId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (seatsId) REFERENCES seats(id),
+   	`passengerType` ENUM('Adult', 'Child') DEFAULT 'Individual',
+    `phone` VARCHAR(255),
+    `email` VARCHAR(255),
+    `nin` VARCHAR(25),
+    `amount` FLOAT (2),
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS stations(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `stationCode` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(255) NOT NULL,
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS seats(
@@ -31,3 +73,4 @@ CREATE TABLE IF NOT EXISTS seats(
     `classId` INT FOREIGN KEY (`classId`) REFERENCES classes(id),
     `status` ENUM('Available','Unavailable') DEFAULT 'Available'
 );
+
