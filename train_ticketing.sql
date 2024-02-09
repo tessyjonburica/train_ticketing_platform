@@ -1,12 +1,25 @@
 CREATE TABLE IF NOT EXISTS customers(
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL,
-    `email`  VARCHAR(255),
+    `surname` VARCHAR(255) NOT NULL,
+    `firstName` VARCHAR(255) NOT NULL,
+    `email`  VARCHAR(255) PRIMARY KEY,
     `phone` CHAR(20),
     `gender` ENUM('Male','Female') DEFAULT 'Male',
     `dateOfBirth` DATE,
     `password` VARCHAR(255) NOT NULL,
-    `NIN` VARCHAR(25)
+    `nin` VARCHAR(25)
+    `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+CREATE TABLE IF NOT EXISTS schedules(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `distance` FLOAT
+    `stationId` INT FOREIGN KEY
+    `arrivalTime` TIMESTAMP,
+    `departureTime` TIMESTAMP,
+    `departureStation` VARCHAR(255)
     `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
