@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS customers(
     `surname` VARCHAR(255) NOT NULL,
     `firstName` VARCHAR(255) NOT NULL,
     `email`  VARCHAR(255),
+
     `phone` VARCHAR(225),
     `gender` ENUM('Male','Female') DEFAULT 'Male',
     `dob` DATE,
@@ -17,15 +18,19 @@ CREATE TABLE IF NOT EXISTS customers(
 CREATE TABLE IF NOT EXISTS schedules(
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
+
     `distance` FLOAT(2), 
     `stationsId` INT UNSIGNED NOT NULL,
     FOREIGN KEY (stationsId) REFERENCES stations(id),
     `arrivalTime` TIMESTAMP NOT NULL,
     `departureTime` TIMESTAMP NOT NULL DEFAULT '2024-02-09 12:00:00',
+
+   
     `departureStation` VARCHAR(255),
     `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE IF NOT EXISTS fares(
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -60,3 +65,12 @@ CREATE TABLE IF NOT EXISTS stations(
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS seats(
+    `id` INT PRIMARY KEY AUTO_INCREMENT ,
+    `code` VARCHAR(255),
+    `coachId` INT FOREIGN KEY (`coachId`) REFERENCES coaches(id),
+    `classId` INT FOREIGN KEY (`classId`) REFERENCES classes(id),
+    `status` ENUM('Available','Unavailable') DEFAULT 'Available'
+);
+
