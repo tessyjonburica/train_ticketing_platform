@@ -1,0 +1,23 @@
+{
+  "name": "train_ticketing_platform",
+  "version": "1.0.0",
+  "description": "train, booking, seats",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tessyjonburica/train_ticketing_platform.git"
+  },
+  "keywords": [
+    "train",
+    "reservation"
+  ],
+  "author": "SwiftRails\\",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tessyjonburica/train_ticketing_platform/issues"
+  },
+  "homepage": "https://github.com/tessyjonburica/train_ticketing_platform#readme"
+}
