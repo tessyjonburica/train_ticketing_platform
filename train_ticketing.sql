@@ -2,12 +2,12 @@ CREATE TABLE IF NOT EXISTS customers(
     `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `surname` VARCHAR(255) NOT NULL,
     `firstName` VARCHAR(255) NOT NULL,
-    `email`  VARCHAR(255) PRIMARY KEY,
-    `phone` CHAR(20),
+    `email`  VARCHAR(255),
+    `phone` VARCHAR(225),
     `gender` ENUM('Male','Female') DEFAULT 'Male',
     `dateOfBirth` DATE,
     `password` VARCHAR(255) NOT NULL,
-    `nin` VARCHAR(25)
+    `nin` VARCHAR(25),
     `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
@@ -19,7 +19,38 @@ CREATE TABLE IF NOT EXISTS schedules(
     `stationId` INT FOREIGN KEY
     `arrivalTime` TIMESTAMP,
     `departureTime` TIMESTAMP,
-    `departureStation` VARCHAR(255)
+    `departureStation` VARCHAR(255),
     `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 )
+
+CREATE TABLE IF NOT EXISTS stations(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `station_code` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `city` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS fares(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+   	`passenger_type` ENUM('Adult', 'Child') DEFAULT 'Individual',
+    `travel_class_id` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (travel_class_id) REFERENCES travel_class(id),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS booked_seats(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `bookings_id` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (bookings_id) REFERENCES bookings(id),
+    `seats_id` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (seats_id) REFERENCES seats(id),
+   	`passenger_type` ENUM('Adult', 'Child') DEFAULT 'Individual',
+    `phone` VARCHAR(255),
+    `email` VARCHAR(255),
+    `nin` VARCHAR(25),
+    `amount` FLOAT (2),
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
