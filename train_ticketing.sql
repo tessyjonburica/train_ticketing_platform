@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS customers(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `email`  VARCHAR(255),
+    `phone` CHAR(20),
+    `gender` ENUM('Male','Female') DEFAULT 'Male',
+    `dateOfBirth` DATE,
+    `password` VARCHAR(255) NOT NULL,
+    `NIN` VARCHAR(25)
+    `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
