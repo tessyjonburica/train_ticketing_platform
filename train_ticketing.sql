@@ -74,3 +74,26 @@ CREATE TABLE IF NOT EXISTS seats(
     `status` ENUM('Available','Unavailable') DEFAULT 'Available'
 );
 
+CREATE TABLE IF NOT EXISTS bookings(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `date` DATE
+    `arrival` TIMESTAMP,
+    `departure` TIMESTAMP,
+    `scheduleId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (`scheduleId`) REFERENCES schedules(id),
+    `customerId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (`customerId`) REFERENCES customers(id),,
+    `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+CREATE TABLE IF NOT EXISTS coaches(
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `code` INT UNSIGNED NOT NULL,
+    `trainId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (`trainId`) REFERENCES trains(id),
+    `classId` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (`classId`) REFERENCES classes(id)
+    `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
