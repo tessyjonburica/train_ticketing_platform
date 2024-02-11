@@ -7,7 +7,7 @@ const port = 3000
 app.use(express.urlencoded({extended: true}));
 
 
-app.get('/', (req, res) => res.send('Hello SwiftRails!'))
+app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
 app.get('/customers', async (req, res)=>{
     const connection = await mysql.createConnection({
@@ -23,8 +23,8 @@ app.get('/customers', async (req, res)=>{
 } )
 
 app.post('/customers', async (req, res)=>{
-    let {surname, firstName, email, phone, gender, dateOfBirth, password, nin} = req.body
-    let sql = `INSERT INTO customers (surname, firstName, email, phone, gender, dateOfBirth, password, nin) VALUES ('${surname}', '${firstName}', '${email}', '${phone}', '${gender}', '${password}', '${dateOfBirth}', '${nin}' ) `
+    let {surname, firstName, email, phone, gender, dob, password, nin} = req.body
+    let sql = `INSERT INTO customers (surname, firstName, email, phone, gender, dob, password, nin) VALUES ('${surname}', '${firstName}', '${email}', '${phone}', '${gender}', '${password}', '${dateOfBirth}', '${nin}' ) `
     const connection = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -32,7 +32,7 @@ app.post('/customers', async (req, res)=>{
         database: 'train_ticketing'
     })
    
-    const [results, fields] = await connection.query(sql)
+    const [results] = await connection.query(sql)
     res.send(results)
 
 } )
