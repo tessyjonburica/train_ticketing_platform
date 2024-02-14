@@ -1,4 +1,10 @@
 
+// const express = require('express');
+// const app = express()
+// const { allCoaches, storeCoach, findCoach, updateCoach, deleteCoach } = require('./controllers/planController');
+// const { allBookings, storeBooking, findBooking, updateBooking, deleteBooking } = require('./controllers/courseController');
+
+
 const express = require('express')
 const mysql = require('mysql2/promise')
 const app = express()
@@ -7,24 +13,24 @@ const port = 3000
 app.use(express.urlencoded({extended: true}));
 
 
-app.get('/', (req, res) => res.send('Hello Swift Rails!'))
+app.get('/', (req, res) => res.send('Hello SwiftRails!'))
 
-app.get('/customers', async (req, res)=>{
+app.get('/bookings', async (req, res)=>{
     const connection = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
         database: 'train_ticketing'
     })
-    let sql = "SELECT * FROM customers"
+    let sql = "SELECT * FROM bookings"
     let [results, fields] = await connection.query(sql)
     res.send(results)
 
 } )
 
-app.post('/customers', async (req, res)=>{
-    let {surname, firstName, email, phone, gender, dob, password, nin} = req.body
-    let sql = `INSERT INTO customers (surname, firstName, email, phone, gender, dob, password, nin) VALUES ('${surname}', '${firstName}', '${email}', '${phone}', '${gender}', '${password}', '${dateOfBirth}', '${nin}' ) `
+app.post('/bookings', async (req, res)=>{
+    let {date, arrivalTime, departureTime, scheduleId, customerId} = req.body
+    let sql = `INSERT INTO bookings (date, arrivalTime, departureTime, scheduleId, customerId) VALUES ('${date}', '${arrivalTime}', '${departureTime}', '${scheduleId}', '${customerId}' ) `
     const connection = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -32,7 +38,7 @@ app.post('/customers', async (req, res)=>{
         database: 'train_ticketing'
     })
    
-    const [results] = await connection.query(sql)
+    const [results, fields] = await connection.query(sql)
     res.send(results)
 
 } )
@@ -40,4 +46,5 @@ app.post('/customers', async (req, res)=>{
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
 
