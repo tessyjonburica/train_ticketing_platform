@@ -1,8 +1,7 @@
 const Customer = require("../models/Customer")
 
 let storeCustomer = async (req, res) => {
-    let {surname, firstName, email, phone, gender, dob, password, nin} = req.body
-    let customer = new Customer(surname, firstName, email, phone, gender, dob, password, nin)
+    let customer = new Customer(req.body)
     await customer.add()
     if (customer.id) {
         res.send('Customer saved')
@@ -11,35 +10,27 @@ let storeCustomer = async (req, res) => {
     }
 }
 
-let updateCustomer = async (req, res)=>{
-    const{id} = req.params;
-    const{surname, firstName, email, phone, gender, dob, password, nin} = req.body
+let updateCustomer = async (req, res) => {
+    const { id } = req.params;
     let customer = await Customer.findById(id)
-    customer.surname = surname
-    customer.firstName = firstName
-    customer.email = email
-    customer.phone = phone
-    customer.gender = gender
-    customer.dob = dob
-    customer.password = password
-    customer.nin = nin
+    customer.setProp(req.body)
     res.send(await customer.update())
 }
 
 let deleteCustomer = async (req, res) => {
-    const{id} = req.params;
+    const { id } = req.params;
     res.send(await Customer.delete(id))
 }
 
-let findCustomer = async (req, res)=>{
-    const {id} = req.params;
+let findCustomer = async (req, res) => {
+    const { id } = req.params;
     let customer = await Customer.findById(id)
     res.send(customer);
 }
 
-let allCustomers  = async (req, res)=>{
+let allCustomers = async (req, res) => {
     let results = await Customer.find()
     res.send(results)
 }
 
-module.exports = {storeCustomer, allCustomers, findCustomer, updateCustomer, deleteCustomer}
+module.exports = { storeCustomer, allCustomers, findCustomer, updateCustomer, deleteCustomer }
