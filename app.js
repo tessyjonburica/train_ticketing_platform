@@ -1,43 +1,26 @@
-
 const express = require('express')
-const mysql = require('mysql2/promise')
+const mysql = require('mysql2/promise');
+const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
+const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
+const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
 const app = express()
 const port = 3000
 
 app.use(express.urlencoded({extended: true}));
 
 
-app.get('/', (req, res) => res.send('Hello SwiftRails!'))
+//Customer route
+app.route('/customers').get(allCustomers).post(storeCustomer)
+app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
 
-app.get('/customers', async (req, res)=>{
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'train_ticketing'
-    })
-    let sql = "SELECT * FROM customers"
-    let [results, fields] = await connection.query(sql)
-    res.send(results)
+//Schedule route
+app.route('/schedules').get(allSchedules).post(storeSchedule)
+app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteSchedule)
 
-} )
-
-app.post('/customers', async (req, res)=>{
-    let {surname, firstName, email, phone, gender, dateOfBirth, password, nin} = req.body
-    let sql = `INSERT INTO customers (surname, firstName, email, phone, gender, dateOfBirth, password, nin) VALUES ('${surname}', '${firstName}', '${email}', '${phone}', '${gender}', '${password}', '${dateOfBirth}', '${nin}' ) `
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'train_ticketing'
-    })
-   
-    const [results, fields] = await connection.query(sql)
-    res.send(results)
-
-} )
+//Seat route
+app.route('/seats').get(allSeats).post(storeSeat)
+app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
 
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
