@@ -32,4 +32,6 @@ coverage/
 # Miscellaneous
 .DS_Store
 
-routes/*
+
+train_ticketing.sql
+
