@@ -1,10 +1,17 @@
 const express = require('express')
+
 const mysql = require('mysql2/promise');
 const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
 const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
 const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
+
 const app = express()
-const port = 3000
+// const mysql = require('mysql2/promise')
+// const route = express.Router();
+// // const adminRoutes = require('./routes/adminRoutes');
+const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
+const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
+const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
 
 app.use(express.urlencoded({extended: true}));
 
@@ -21,6 +28,23 @@ app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteS
 app.route('/seats').get(allSeats).post(storeSeat)
 app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
 
+app.get('/', (req, res) => res.send('Hello Swift Rails!'))
+
+
+//stations route
+app.route('/stations').get(allStations).post(storeStation)
+app.route('/stations/:id').get(findStation).put(updateStation).delete(deleteStation)
+
+//fares route
+app.route('/fares').get(allFares).post(storeFare)
+app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
+
+
+//bookedSeats route
+app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
+app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
