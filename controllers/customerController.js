@@ -23,6 +23,7 @@ let updateCustomer = async (req, res)=>{
     customer.dob = dob
     customer.password = password
     customer.nin = nin
+    res.send(await customer.update())
 }
 
 let deleteCustomer = async (req, res) => {
