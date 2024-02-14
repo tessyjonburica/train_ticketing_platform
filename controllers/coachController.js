@@ -22,15 +22,15 @@ let deleteCoach = async (req, res) => {
     res.send(await Coach.delete(id))
 }
 
-let fineCoach =  async (req, res)=>{
+let findCoach =  async (req, res)=>{
     const {id} = req.params;
     let coach = await Coach.findById(id)
     res.send(coach);
 }
 
-let aleCoachs =  async (req, res)=>{
+let allCoaches =  async (req, res)=>{
     let results = await Coach.find()
     res.send(results)
 }
 
-module.exports = {storeCoach, aleCoachs, fineCoach, updateCoach, deleteCoach}
+module.exports = {storeCoach, allCoaches, findCoach, updateCoach, deleteCoach}

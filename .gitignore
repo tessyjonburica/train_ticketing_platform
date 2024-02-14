@@ -32,3 +32,5 @@ coverage/
 # Miscellaneous
 .DS_Store
 
+Model.js
+train_ticketing.sql
