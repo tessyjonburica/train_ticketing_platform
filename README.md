@@ -1,3 +1,3 @@
 # train_ticketing_platform
 This is a train booking system designed to let users book thier train seats between a certain schedule.
-#
+//fares (get,post,put, delete) these are to be tested!!

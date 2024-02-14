@@ -1,43 +1,29 @@
-
 const express = require('express')
-const mysql = require('mysql2/promise')
 const app = express()
-const port = 3000
+// const mysql = require('mysql2/promise')
+// const route = express.Router();
+// // const adminRoutes = require('./routes/adminRoutes');
+const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
+const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
+const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
 
 app.use(express.urlencoded({extended: true}));
 
 
 app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
-app.get('/customers', async (req, res)=>{
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'train_ticketing'
-    })
-    let sql = "SELECT * FROM customers"
-    let [results, fields] = await connection.query(sql)
-    res.send(results)
 
-} )
+//stations route
+app.route('/stations').get(allStations).post(storeStation)
+app.route('/stations/:id').get(findStation).put(updateStation).delete(deleteStation)
 
-app.post('/customers', async (req, res)=>{
-    let {surname, firstName, email, phone, gender, dob, password, nin} = req.body
-    let sql = `INSERT INTO customers (surname, firstName, email, phone, gender, dob, password, nin) VALUES ('${surname}', '${firstName}', '${email}', '${phone}', '${gender}', '${password}', '${dateOfBirth}', '${nin}' ) `
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'train_ticketing'
-    })
-   
-    const [results] = await connection.query(sql)
-    res.send(results)
+//fares route
+app.route('/fares').get(allFares).post(storeFare)
+app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 
-} )
+//bookedSeats route
+app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
+app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
 
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
+app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
