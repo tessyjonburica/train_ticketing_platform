@@ -1,5 +1,6 @@
 const Station = require("../models/Station.js")
 
+
 let storeStation = async (req, res) => {
     let station = new Station(req.body)
     await station.add()
@@ -14,6 +15,7 @@ let updateStation = async (req, res)=>{
     const {id} = req.params;
     let station = await Station.findById(id)
     station.setProp(req.body)
+    
     res.send(await station.update())
 }
 
