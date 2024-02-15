@@ -1,8 +1,8 @@
 const Schedule = require("../models/Schedule")
 
 let storeSchedule = async (req, res) => {
-    let {surname, firstName, email, stationId, gender, dob, password, nin} = req.body
-    let schedule = new Schedule(surname, firstName, email, phone, gender, dob, password, nin)
+   
+    let schedule = new Schedule(req.body)
     await schedule.add()
     if (schedule.id) {
         res.send('Schedule saved')
@@ -13,15 +13,8 @@ let storeSchedule = async (req, res) => {
 
 let updateSchedule = async (req, res)=>{
     const{id} = req.params;
-    const{name, distance, stationId, arrivalTime, departureTime, departureStation} = req.body
     let schedule = await Schedule.findById(id)
-    
-    schedule.name = name;
-    schedule.distance = distance;
-    schedule.stationId = stationId;
-    schedule.arrivalTime = arrivalTime;
-    schedule.departureTime = departureTime;
-    schedule.departureStation = departureStation;
+    schedule.setProp(req.body)
     res.send(await schedule.update())
 }
 
