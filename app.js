@@ -10,10 +10,17 @@ const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./con
 const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
 const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
 const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
+const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
+const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
+const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 const customerValidator = require('./validators/customerValidator');
 
 
 app.use(express.urlencoded({extended: true}));
+
+
+// app.get('/', (req, res) => res.send('Hello SwiftRails!'))
+
 
 // Coach route
 app.route('/coaches').get(allCoaches).post(storeCoach)
@@ -55,5 +62,3 @@ app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(
 
 
 app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
-
-
