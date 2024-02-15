@@ -1,4 +1,4 @@
-const BookedSeat = require("../models/bookedSeats.js")
+const BookedSeat = require("../models/bookedSeat.js")
 
 let storeBookedSeat = async (req, res) => {
     let {passengerType, travelClassId} = req.body

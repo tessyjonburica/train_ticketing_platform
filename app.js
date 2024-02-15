@@ -1,13 +1,11 @@
 const express = require('express')
 const app = express()
-const mysql = require('mysql2/promise');
 const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
 const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
 const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
 
-// const mysql = require('mysql2/promise')
-// const route = express.Router();
-// // const adminRoutes = require('./routes/adminRoutes');
+
+
 const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
 const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
 const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
@@ -45,5 +43,5 @@ app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(
 
 
 
-app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
+app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
 

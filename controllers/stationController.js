@@ -1,8 +1,7 @@
-const Station = require("../models/stations.js")
+const Station = require("../models/Station.js")
 
 let storeStation = async (req, res) => {
-    let {stationCode, name, city} = req.body
-    let station = new Station(stationCode, name, city)
+    let station = new Station(req.body)
     await station.add()
     if (station.id) {
         res.send('station saved successfully')
@@ -13,14 +12,9 @@ let storeStation = async (req, res) => {
 
 let updateStation = async (req, res)=>{
     const {id} = req.params;
-    const {stationCode, name, city} = req.body
     let station = await Station.findById(id)
-    station.stationCode = stationCode;
-    station.name = name;
-    station.city = city;
-    
+    station.setProp(req.body)
     res.send(await station.update())
-    
 }
 
 let deleteStation = async (req, res) => {
