@@ -10,6 +10,7 @@ const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./con
 const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
 const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
 const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
+const customerValidator = require('./validators/customerValidator');
 
 
 app.use(express.urlencoded({extended: true}));
@@ -24,7 +25,7 @@ app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBook
 
 
 //Customer route
-app.route('/customers').get(allCustomers).post(storeCustomer)
+app.route('/customers').get(allCustomers).post(customerValidator ,storeCustomer)
 app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
 
 //Schedule route
