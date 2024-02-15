@@ -1,3 +1,4 @@
+
 const connection = require("./connection")
 const pluralize = require('pluralize')
 
@@ -71,3 +72,4 @@ class Model {
 }
 
 module.exports = Model
+
