@@ -1,8 +1,7 @@
 const Seat = require("../models/Seat")
 
 let storeSeat = async (req,res) => {
-    let {code, coachId, customerId, classId, status} = req.body
-    let seat = new Seat(code, coachId, customerId, classId, status)
+    let seat = new Seat(req.body)
     await seat.add()
     if (seat.id) {
         res.send('Seat saved successfully')
@@ -13,13 +12,8 @@ let storeSeat = async (req,res) => {
 
 let updateSeat = async (req, res)=> {
     const {id} = req.params;
-    const {code, coachId, customerId, classId, status} = req.body
     let seat = await Seat.findById(id)
-    seat.classId = classId
-    seat.coachId = coachId
-    seat.code = code
-    seat.customerId = customerId
-    seat.status = status
+    seat.setProp(req.body)
     res.send(await seat.update())
 }
 
