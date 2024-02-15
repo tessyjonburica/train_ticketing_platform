@@ -32,3 +32,6 @@ coverage/
 # Miscellaneous
 .DS_Store
 
+
+train_ticketing.sql
+
