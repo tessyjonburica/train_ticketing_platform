@@ -1,53 +1,18 @@
 
-// const express = require('express')
-// const mysql = require('mysql2/promise')
-// const app = express()
-// const port = 3000
-
-// app.use(express.urlencoded({extended: true}));
-
-
-// app.get('/', (req, res) => res.send('Hello SwiftRails!'))
-
-// app.get('/bookings', async (req, res)=>{
-//     const connection = await mysql.createConnection({
-//         host: 'localhost',
-//         user: 'root',
-//         password: '',
-//         database: 'train_ticketing'
-//     })
-//     let sql = "SELECT * FROM bookings"
-//     let [results, fields] = await connection.query(sql)
-//     res.send(results)
-
-// } )
-
-// app.post('/bookings', async (req, res)=>{
-//     let {date, arrivalTime, departureTime, scheduleId, customerId} = req.body
-//     let sql = `INSERT INTO bookings (date, arrivalTime, departureTime, scheduleId, customerId) VALUES ('${date}', '${arrivalTime}', '${departureTime}', '${scheduleId}', '${customerId}' ) `
-//     const connection = await mysql.createConnection({
-//         host: 'localhost',
-//         user: 'root',
-//         password: '',
-//         database: 'train_ticketing'
-//     })
-   
-//     const [results, fields] = await connection.query(sql)
-//     res.send(results)
-
-// } )
-
-
-
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-const express = require('express');
+const express = require('express')
 const app = express()
+const mysql = require('mysql2/promise');
 const { allCoaches, storeCoach, findCoach, updateCoach, deleteCoach } = require('./controllers/coachController');
 const { allBookings, storeBooking, findBooking, updateBooking, deleteBooking } = require('./controllers/bookingController');
+const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
+const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
+const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
+const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
+const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
+const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
+
 
 app.use(express.urlencoded({extended: true}));
-
 
 // Coach route
 app.route('/coaches').get(allCoaches).post(storeCoach)
@@ -57,8 +22,37 @@ app.route('/coaches/:id').get(findCoach).put(updateCoach).delete(deleteCoach)
 app.route('/bookings').get(allBookings).post(storeBooking)
 app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBooking)
 
+
+//Customer route
+app.route('/customers').get(allCustomers).post(storeCustomer)
+app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
+
+//Schedule route
+app.route('/schedules').get(allSchedules).post(storeSchedule)
+app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteSchedule)
+
+//Seat route
+app.route('/seats').get(allSeats).post(storeSeat)
+app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
+
+app.get('/', (req, res) => res.send('Hello Swift Rails!'))
+
+
+//stations route
+app.route('/stations').get(allStations).post(storeStation)
+app.route('/stations/:id').get(findStation).put(updateStation).delete(deleteStation)
+
+//fares route
+app.route('/fares').get(allFares).post(storeFare)
+app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
+
+
+//bookedSeats route
+app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
+app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
+
+
+
 app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
-
-
 
 
