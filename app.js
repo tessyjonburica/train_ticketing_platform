@@ -87,20 +87,23 @@ const app = express()
 const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
+const amountValidator = require('./validators/amountValidator');
+const trainValidator = require('./validators/trainValidator');
+const travelClassValidator = require('./validators/travelClassValidator');
 
 app.use(express.urlencoded({extended: true}));
 
 
-//Plan route
-app.route('/trains').get(allTrains).post(storeTrain)
-app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
+//Trains route
+app.route('/trains').get(allTrains).post(trainValidator, storeTrain)
+app.route('/trains/:id').get(findTrain).put(trainValidator, updateTrain).delete(deleteTrain)
 
-//Student route
-app.route('/amounts').get(allAmounts).post(storeAmount)
-app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
+//Amounts route
+app.route('/amounts').get(allAmounts).post(amountValidator, storeAmount)
+app.route('/amounts/:id').get(findAmount).put(amountValidator, updateAmount).delete(deleteAmount)
 
-//Instructor route
-app.route('/travelClasses').get(allTravelClasses).post(storeTravelClass)
-app.route('/travelClasses/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+//TravelClasses route
+app.route('/travelClasses').get(allTravelClasses).post(travelClassValidator, storeTravelClass)
+app.route('/travelClasses/:id').get(findTravelClass).put(travelClassValidator, updateTravelClass).delete(deleteTravelClass)
 
 app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
