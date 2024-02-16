@@ -19,9 +19,6 @@ const customerValidator = require('./validators/customerValidator');
 app.use(express.urlencoded({extended: true}));
 
 
-// app.get('/', (req, res) => res.send('Hello SwiftRails!'))
-
-
 // Coach route
 app.route('/coaches').get(allCoaches).post(storeCoach)
 app.route('/coaches/:id').get(findCoach).put(updateCoach).delete(deleteCoach)
@@ -58,6 +55,7 @@ app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 //bookedSeats route
 app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
+
 
 
 
