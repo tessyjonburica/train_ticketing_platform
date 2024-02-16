@@ -7,12 +7,5 @@ class Booking extends Model {
 
    
 
-    
-
-    
-
-   
-   
-
 
 module.exports = Booking

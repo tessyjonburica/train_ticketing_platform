@@ -14,6 +14,8 @@ const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 const customerValidator = require('./validators/customerValidator');
+const bookingValidator = require('./validators/bookingValidator');
+const coachValidator = require('./validators/coachValidator');
 
 
 app.use(express.urlencoded({extended: true}));
@@ -23,11 +25,11 @@ app.use(express.urlencoded({extended: true}));
 
 
 // Coach route
-app.route('/coaches').get(allCoaches).post(storeCoach)
+app.route('/coaches').get(allCoaches).post(coachValidator, storeCoach)
 app.route('/coaches/:id').get(findCoach).put(updateCoach).delete(deleteCoach)
 
 //Booking route
-app.route('/bookings').get(allBookings).post(storeBooking)
+app.route('/bookings').get(allBookings).post(bookingValidator, storeBooking)
 app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBooking)
 
 
@@ -58,6 +60,14 @@ app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 //bookedSeats route
 app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
+
+//trains route
+app.route('/trains').get(allTrains).post(storeTrain)
+app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
+
+//travelclasses route
+app.route('/travelclasses').get(allTravelClasses).post(storeTravelClass)
+app.route('/travelclasses/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 
 
 
