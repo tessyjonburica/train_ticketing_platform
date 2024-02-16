@@ -12,21 +12,23 @@ const { allStations, storeStation, findStation, updateStation, deleteStation } =
 const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
 const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
 const customerValidator = require('./validators/customerValidator');
+const scheduleValidator = require('./validators/scheduleValidator');
+const seatValidator = require('./validators/seatValidator');
 
 app.use(express.urlencoded({extended: true}));
 
 
 //Customer route
 app.route('/customers').get(allCustomers).post(customerValidator ,storeCustomer)
-app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
+app.route('/customers/:id').get(findCustomer).put(customerValidator,updateCustomer).delete(deleteCustomer)
 
 //Schedule route
-app.route('/schedules').get(allSchedules).post(storeSchedule)
-app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteSchedule)
+app.route('/schedules').get(allSchedules).post(scheduleValidator,storeSchedule)
+app.route('/schedules/:id').get(findSchedule).put(scheduleValidator,updateSchedule).delete(deleteSchedule)
 
 //Seat route
-app.route('/seats').get(allSeats).post(storeSeat)
-app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
+app.route('/seats').get(allSeats).post(seatValidator,storeSeat)
+app.route('/seats/:id').get(findSeat).put(seatValidator,updateSeat).delete(deleteSeat)
 
 app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
