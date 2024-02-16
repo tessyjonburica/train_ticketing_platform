@@ -1,21 +1,33 @@
+
 const express = require('express')
 const app = express()
 const mysql = require('mysql2/promise');
+const { allCoaches, storeCoach, findCoach, updateCoach, deleteCoach } = require('./controllers/coachController');
+const { allBookings, storeBooking, findBooking, updateBooking, deleteBooking } = require('./controllers/bookingController');
 const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
 const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
 const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
-
-// const mysql = require('mysql2/promise')
-// const route = express.Router();
-// // const adminRoutes = require('./routes/adminRoutes');
 const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
 const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
 const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
+const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
+const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
+const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 const customerValidator = require('./validators/customerValidator');
 const scheduleValidator = require('./validators/scheduleValidator');
 const seatValidator = require('./validators/seatValidator');
 
+
 app.use(express.urlencoded({extended: true}));
+
+
+// Coach route
+app.route('/coaches').get(allCoaches).post(storeCoach)
+app.route('/coaches/:id').get(findCoach).put(updateCoach).delete(deleteCoach)
+
+//Booking route
+app.route('/bookings').get(allBookings).post(storeBooking)
+app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBooking)
 
 
 //Customer route
@@ -48,5 +60,5 @@ app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(
 
 
 
-app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
 
+app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))

@@ -1,4 +1,5 @@
-const Station = require("../models/Stations.js")
+const Station = require("../models/Station.js")
+
 
 let storeStation = async (req, res) => {
     let station = new Station(req.body)
@@ -16,7 +17,6 @@ let updateStation = async (req, res)=>{
     station.setProp(req.body)
     
     res.send(await station.update())
-    
 }
 
 let deleteStation = async (req, res) => {
