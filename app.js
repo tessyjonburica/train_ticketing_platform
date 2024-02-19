@@ -15,6 +15,9 @@ const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = requ
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 // const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const customerValidator = require('./validators/customerValidator');
+const scheduleValidator = require('./validators/scheduleValidator');
+const seatValidator = require('./validators/seatValidator');
+const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const bookingValidator = require('./validators/bookingValidator');
 const coachValidator = require('./validators/coachValidator');
 
@@ -33,15 +36,15 @@ app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBook
 
 //Customer route
 app.route('/customers').get(allCustomers).post(customerValidator ,storeCustomer)
-app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
+app.route('/customers/:id').get(findCustomer).put(customerValidator,updateCustomer).delete(deleteCustomer)
 
 //Schedule route
-app.route('/schedules').get(allSchedules).post(storeSchedule)
-app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteSchedule)
+app.route('/schedules').get(allSchedules).post(scheduleValidator,storeSchedule)
+app.route('/schedules/:id').get(findSchedule).put(scheduleValidator,updateSchedule).delete(deleteSchedule)
 
 //Seat route
-app.route('/seats').get(allSeats).post(storeSeat)
-app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
+app.route('/seats').get(allSeats).post(seatValidator,storeSeat)
+app.route('/seats/:id').get(findSeat).put(seatValidator,updateSeat).delete(deleteSeat)
 
 app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
@@ -76,6 +79,14 @@ app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 // app.route('/admins').get(allAdmins).post(storeAdmin)
 // app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
+
+//travelClasses route
+app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
+app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+
+
+app.route('/admins').get(allAdmins).post(storeAdmin)
+app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
 
