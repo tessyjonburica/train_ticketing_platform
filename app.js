@@ -21,15 +21,15 @@ const customerValidator = require('./validators/customerValidator');
 app.use(express.urlencoded({extended: true}));
 //Trains route
 app.route('/trains').get(allTrains).post(trainValidator, storeTrain)
-app.route('/trains/:id').get(findTrain).put(trainValidator, updateTrain).delete(deleteTrain)
+app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
 
 //Amounts route
 app.route('/amounts').get(allAmounts).post(amountValidator, storeAmount)
-app.route('/amounts/:id').get(findAmount).put(amountValidator, updateAmount).delete(deleteAmount)
+app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 
 //TravelClasses route
 app.route('/travelClasses').get(allTravelClasses).post(travelClassValidator, storeTravelClass)
-app.route('/travelClasses/:id').get(findTravelClass).put(travelClassValidator, updateTravelClass).delete(deleteTravelClass)
+app.route('/travelClasses/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 // app.get('/', (req, res) => res.send('Hello SwiftRails!'))
 
 
