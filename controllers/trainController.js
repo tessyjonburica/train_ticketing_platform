@@ -1,8 +1,7 @@
 const Train = require("../models/Train")
 
 let storeTrain = async (req, res) => {
-    let {code} = req.body
-    let train = new Train(code)
+    let train = new Train(req.body)
     await train.add()
     if (train.id) {
         res.send('Train saved successfully')
@@ -13,9 +12,8 @@ let storeTrain = async (req, res) => {
 
 let updateTrain = async (req, res)=>{
     const {id} = req.params;
-    const {code} = req.body
     let train = await Train.findById(id)
-    train.code = code
+    train.setProp(req.body)
     res.send(await train.update())
 }
 

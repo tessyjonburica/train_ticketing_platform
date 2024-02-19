@@ -13,8 +13,7 @@ let storeFare = async (req, res) => {
 let updateFare = async (req, res)=>{
     const {id} = req.params;
     let fare = await Fare.findById(id)
-    fare.setProp(req.body)
-    
+    fare.setProp(req.body)    
     res.send(await fare.update())
 }
 
