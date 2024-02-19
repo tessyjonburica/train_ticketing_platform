@@ -14,6 +14,9 @@ const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 const customerValidator = require('./validators/customerValidator');
+const stationValidator = require('./validators/stationValidator');
+const fareValidator = require('./validators/fareValidator');
+const bookedSeatValidator = require('./validators/bookedSeatValidator');
 
 
 app.use(express.urlencoded({extended: true}));
@@ -29,7 +32,7 @@ app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBook
 
 
 //Customer route
-app.route('/customers').get(allCustomers).post(customerValidator ,storeCustomer)
+app.route('/customers').get(allCustomers).post(customerValidator, storeCustomer)
 app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
 
 //Schedule route
@@ -44,19 +47,31 @@ app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
 
 //stations route
-app.route('/stations').get(allStations).post(storeStation)
+app.route('/stations').get(allStations).post(stationValidator, storeStation)
 app.route('/stations/:id').get(findStation).put(updateStation).delete(deleteStation)
 
 //fares route
-app.route('/fares').get(allFares).post(storeFare)
+app.route('/fares').get(allFares).post(fareValidator, storeFare)
 app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 
 
 //bookedSeats route
-app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
+app.route('/booked-seats').get(allBookedSeats).post(bookedSeatValidator, storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
 
 
+//TravelClass route
+app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
+app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 
 
-app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
+//trains route
+app.route('/trains').get(allTrains).post(storeTrain)
+app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
+
+
+//Amount route
+app.route('/amount').get(allAmounts).post(storeAmount)
+app.route('/amount/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
+
+app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))

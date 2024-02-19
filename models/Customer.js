@@ -5,14 +5,4 @@ class Customer extends Model {
     
     }
 
-   
-
-    
-
-    
-
-   
-   
-
-
 module.exports = Customer

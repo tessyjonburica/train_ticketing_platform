@@ -1,8 +1,7 @@
 const TravelClass = require("../models/TravelClass")
 
 let storeTravelClass = async (req, res) => {
-    let {name, description} = req.body
-    let travelClass = new TravelClass(name,description)
+    let travelClass = new TravelClass(req.body)
     await travelClass.add()
     if (travelClass.id) {
         res.send('travelClass saved successfully')
@@ -13,10 +12,8 @@ let storeTravelClass = async (req, res) => {
 
 let updateTravelClass = async (req, res)=>{
     const {id} = req.params;
-    const {name, description} = req.body
     let travelClass = await TravelClass.findById(id)
-    travelClass.name = name
-    travelClass.description = description
+    travelClass.setProp(req.body)
     res.send(await travelClass.update())
 }
 
