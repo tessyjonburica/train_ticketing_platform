@@ -1,4 +1,4 @@
-const Fare = require("../models/fares.js")
+const Fare = require("../models/Fare.js")
 
 let storeFare = async (req, res) => {
     let fare = new Fare(req.body)
@@ -13,10 +13,10 @@ let storeFare = async (req, res) => {
 let updateFare = async (req, res)=>{
     const {id} = req.params;
     let fare = await Fare.findById(id)
-    fare.setProp(req.body)
-    
+    fare.setProp(req.body)    
     res.send(await fare.update())
 }
+
 
 let deleteFare = async (req, res) => {
     const{id} = req.params;    

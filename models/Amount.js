@@ -1,11 +1,10 @@
+
 const Model = require("./Model")
 const connection = require("./connection")
 
-class Booking extends Model {
+class Amount extends Model {
     
-    }
 
-   
+}
 
-
-module.exports = Booking
+module.exports = Amount

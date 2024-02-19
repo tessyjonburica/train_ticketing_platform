@@ -1,7 +1,6 @@
 const Schedule = require("../models/Schedule")
 
 let storeSchedule = async (req, res) => {
-   
     let schedule = new Schedule(req.body)
     await schedule.add()
     if (schedule.id) {
