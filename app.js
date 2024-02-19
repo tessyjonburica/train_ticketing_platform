@@ -15,14 +15,18 @@ const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = requ
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
 // const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const customerValidator = require('./validators/customerValidator');
+const stationValidator = require('./validators/stationValidator');
+const fareValidator = require('./validators/fareValidator');
+const bookedSeatValidator = require('./validators/bookedSeatValidator');
+const scheduleValidator = require('./validators/scheduleValidator');
+const seatValidator = require('./validators/seatValidator');
+const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const bookingValidator = require('./validators/bookingValidator');
 const coachValidator = require('./validators/coachValidator');
 
 
+
 app.use(express.urlencoded({extended: true}));
-
-
-// app.get('/', (req, res) => res.send('Hello SwiftRails!'))
 
 
 // Coach route
@@ -35,31 +39,33 @@ app.route('/bookings/:id').get(findBooking).put(updateBooking).delete(deleteBook
 
 
 //Customer route
+
 app.route('/customers').get(allCustomers).post(customerValidator ,storeCustomer)
-app.route('/customers/:id').get(findCustomer).put(updateCustomer).delete(deleteCustomer)
+app.route('/customers/:id').get(findCustomer).put(customerValidator,updateCustomer).delete(deleteCustomer)
+
 
 //Schedule route
-app.route('/schedules').get(allSchedules).post(storeSchedule)
-app.route('/schedules/:id').get(findSchedule).put(updateSchedule).delete(deleteSchedule)
+app.route('/schedules').get(allSchedules).post(scheduleValidator,storeSchedule)
+app.route('/schedules/:id').get(findSchedule).put(scheduleValidator,updateSchedule).delete(deleteSchedule)
 
 //Seat route
-app.route('/seats').get(allSeats).post(storeSeat)
-app.route('/seats/:id').get(findSeat).put(updateSeat).delete(deleteSeat)
+app.route('/seats').get(allSeats).post(seatValidator,storeSeat)
+app.route('/seats/:id').get(findSeat).put(seatValidator,updateSeat).delete(deleteSeat)
 
 app.get('/', (req, res) => res.send('Hello Swift Rails!'))
 
 
 //stations route
-app.route('/stations').get(allStations).post(storeStation)
+app.route('/stations').get(allStations).post(stationValidator, storeStation)
 app.route('/stations/:id').get(findStation).put(updateStation).delete(deleteStation)
 
 //fares route
-app.route('/fares').get(allFares).post(storeFare)
+app.route('/fares').get(allFares).post(fareValidator, storeFare)
 app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 
 
 //bookedSeats route
-app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
+app.route('/booked-seats').get(allBookedSeats).post(bookedSeatValidator, storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
 
 //trains route
@@ -80,5 +86,26 @@ app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 // app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
+//travelClasses route
+app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
+app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 
-app.listen(3000, ()=>console.log('server is listening on port 3000.\n visit http://localhost:3000'))
+
+app.route('/admins').get(allAdmins).post(storeAdmin)
+app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+
+//TravelClass route
+app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
+app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+
+
+//trains route
+app.route('/trains').get(allTrains).post(storeTrain)
+app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
+
+
+//Amount route
+app.route('/amount').get(allAmounts).post(storeAmount)
+app.route('/amount/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
+
+app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))

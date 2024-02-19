@@ -1,8 +1,7 @@
 const Amount = require("../models/Amount")
 
 let storeAmount = async (req, res) => {
-    let {amount} = req.body
-    let newAmount = new Amount(amount)
+    let newAmount = new Amount(req.body)
     await newAmount.add()
     if (newAmount.id) {
         res.send('Amount saved successfully')
@@ -13,11 +12,11 @@ let storeAmount = async (req, res) => {
 
 let updateAmount = async (req, res)=>{
     const {id} = req.params;
-    const {amount: newAmountValue} = req.body
     let existingAmountValue = await Amount.findById(id)
-    existingAmountValue.amount = newAmountValue
+    existingAmountValue.setProp(req.body)
     res.send(await existingAmountValue.update())
 }
+
 
 let deleteAmount = async (req, res) => {
     const{id} = req.params;    
