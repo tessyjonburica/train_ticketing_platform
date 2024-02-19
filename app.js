@@ -16,6 +16,7 @@ const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, 
 const customerValidator = require('./validators/customerValidator');
 const scheduleValidator = require('./validators/scheduleValidator');
 const seatValidator = require('./validators/seatValidator');
+const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 
 
 app.use(express.urlencoded({extended: true}));
@@ -58,6 +59,14 @@ app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 app.route('/booked-seats').get(allBookedSeats).post(storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
 
+
+//travelClasses route
+app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
+app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+
+
+app.route('/admins').get(allAdmins).post(storeAdmin)
+app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
 

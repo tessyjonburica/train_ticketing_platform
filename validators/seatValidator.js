@@ -7,6 +7,7 @@ const seatValidator =[
     body('cutomerId').notEmpty().withMessage("Customer ID is required").isNumeric().withMessage("Customer ID must be a number"),
     body('travelClassId').notEmpty().withMessage("Travel class ID is required").isNumeric().withMessage("Travel class ID must be a number"),
     body('status').notEmpty().withMessage("Status is required").isString().withMessage("Status must be a string").isIn(["available", "booked", "unavailable"]).withMessage("Status must be either 'available', 'booked', or 'unavailable'"),
+    checkValidationResult
 
 ]
 
