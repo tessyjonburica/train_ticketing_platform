@@ -13,6 +13,7 @@ const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, delet
 const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
+// const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const customerValidator = require('./validators/customerValidator');
 const bookingValidator = require('./validators/bookingValidator');
 const coachValidator = require('./validators/coachValidator');
@@ -68,6 +69,15 @@ app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
 //travelclasses route
 app.route('/travelclasses').get(allTravelClasses).post(storeTravelClass)
 app.route('/travelclasses/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+
+//Amount route
+app.route('/amounts').get(allAmounts).post(storeAmount)
+app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
+
+// Admin route
+// app.route('/login').get((req, res)=>{}).post(login)
+// app.route('/admins').get(allAdmins).post(storeAdmin)
+// app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
 
