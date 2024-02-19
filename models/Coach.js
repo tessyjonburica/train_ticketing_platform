@@ -7,12 +7,5 @@ class Coach extends Model {
 
    
 
-    
-
-    
-
-   
-   
-
 
 module.exports = Coach

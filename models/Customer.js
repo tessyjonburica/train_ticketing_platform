@@ -9,8 +9,7 @@ class Customer extends Model {
 
     
 
-    
-
+     
    
    
 
