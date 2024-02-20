@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS travelClasses (
 
 
 
+
+
 CREATE TABLE IF NOT EXISTS fares (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     passengerType ENUM('Adult', 'Child') NOT NULL,
