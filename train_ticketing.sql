@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS travelClasses (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-
+)
 
 
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS fares (
     passengerType ENUM('Adult', 'Child') NOT NULL,
     travelClassId INT UNSIGNED NOT NULL,
     FOREIGN KEY (travelClassId) REFERENCES travelClasses(id),
-
+)
 
 CREATE TABLE IF NOT EXISTS bookings (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     FOREIGN KEY (scheduleId) REFERENCES schedules(id),
     customerId INT UNSIGNED NOT NULL,
     FOREIGN KEY (customerId) REFERENCES customers(id),
-
+)
 
 
 CREATE TABLE IF NOT EXISTS trains (
@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS amounts (
 );
 
 CREATE TABLE admins(
+
     `name` VARCHAR(255) NOT NULL, 
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,

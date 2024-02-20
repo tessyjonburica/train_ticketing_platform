@@ -13,6 +13,10 @@ const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, delet
 const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
+const amountValidator = require('./validators/amountValidator');
+const trainValidator = require('./validators/trainValidator');
+const travelClassValidator = require('./validators/travelClassValidator');
+
 // const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const customerValidator = require('./validators/customerValidator');
 const stationValidator = require('./validators/stationValidator');
@@ -27,7 +31,6 @@ const coachValidator = require('./validators/coachValidator');
 
 
 app.use(express.urlencoded({extended: true}));
-
 
 // Coach route
 app.route('/coaches').get(allCoaches).post(coachValidator, storeCoach)
@@ -68,6 +71,7 @@ app.route('/fares/:id').get(findFare).put(updateFare).delete(deleteFare)
 app.route('/booked-seats').get(allBookedSeats).post(bookedSeatValidator, storeBookedSeat)
 app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(deleteBookedSeat)
 
+
 //trains route
 app.route('/trains').get(allTrains).post(storeTrain)
 app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
@@ -86,26 +90,8 @@ app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 // app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
-//travelClasses route
-app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
-app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
-
-
 app.route('/admins').get(allAdmins).post(storeAdmin)
 app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
-//TravelClass route
-app.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
-app.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
-
-
-//trains route
-app.route('/trains').get(allTrains).post(storeTrain)
-app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
-
-
-//Amount route
-app.route('/amount').get(allAmounts).post(storeAmount)
-app.route('/amount/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
-
 app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
+
