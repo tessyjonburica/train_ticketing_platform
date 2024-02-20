@@ -1,4 +1,4 @@
-const {body} = require("express-validator")
+const {body} = require('express-validator')
 const checkValidationResult = require("./checkValidationResult")
 
 
@@ -10,6 +10,7 @@ const customerValidator = [
     body('dob').notEmpty().withMessage('Date of birth is required').isDate().withMessage('Invalid date of birth format').isBefore().withMessage('Date of birth cannot be in the future'),
     body('phone').notEmpty().withMessage('Phone is required').isMobilePhone("en-NG").withMessage('Invalid phone number format'),
     body('password').notEmpty().withMessage('Password is required').isStrongPassword(),
+    body('nin').notEmpty( ).withMessage( "NIN number is required" ).isNumeric().withMessage('NIN must be numeric' ).isLength({max: 11}),
     checkValidationResult
 ]
 

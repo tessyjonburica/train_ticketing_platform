@@ -10,8 +10,9 @@ let storeTravelClass = async (req, res) => {
     }
 }
 
-let updateTravelClass = async (req, res) => {
-    const { id } = req.params;
+let updateTravelClass = async (req, res)=>{
+    const {id} = req.params;
+
     let travelClass = await TravelClass.findById(id)
     travelClass.setProp(req.body)
     res.send(await travelClass.update())

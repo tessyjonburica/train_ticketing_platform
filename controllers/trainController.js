@@ -10,8 +10,10 @@ let storeTrain = async (req, res) => {
     }
 }
 
-let updateTrain = async (req, res) => {
-    const { id } = req.params;
+
+let updateTrain = async (req, res)=>{
+    const {id} = req.params;
+
     let train = await Train.findById(id)
     train.setProp(req.body)
     res.send(await train.update())
