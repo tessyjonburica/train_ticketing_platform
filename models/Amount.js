@@ -8,3 +8,4 @@ class Amount extends Model {
 }
 
 module.exports = Amount
+
