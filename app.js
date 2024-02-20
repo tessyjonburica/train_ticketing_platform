@@ -1,33 +1,8 @@
-
 const express = require('express')
 const app = express()
 const mysql = require('mysql2/promise');
-const { allCoaches, storeCoach, findCoach, updateCoach, deleteCoach } = require('./controllers/coachController');
-const { allBookings, storeBooking, findBooking, updateBooking, deleteBooking } = require('./controllers/bookingController');
-const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('./controllers/customerController');
-const { allSchedules, storeSchedule, findSchedule, updateSchedule, deleteSchedule } = require('./controllers/scheduleController');
-const { allSeats, storeSeat, findSeat, updateSeat, deleteSeat } = require('./controllers/seatController');
-const { allStations, storeStation, findStation, updateStation, deleteStation } = require('./controllers/stationController');
-const { storeFare, allFares, findFare, updateFare, deleteFare } = require('./controllers/faresController');
-const { allBookedSeats, storeBookedSeat, findBookedSeat, updateBookedSeat, deleteBookedSeat } = require('./controllers/bookedSeatController');
-const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('./controllers/trainController');
-const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('./controllers/amountController');
-const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('./controllers/travelClassController');
-const amountValidator = require('./validators/amountValidator');
-const trainValidator = require('./validators/trainValidator');
-const travelClassValidator = require('./validators/travelClassValidator');
-
-const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
-const customerValidator = require('./validators/customerValidator');
-const stationValidator = require('./validators/stationValidator');
-const fareValidator = require('./validators/fareValidator');
-const bookedSeatValidator = require('./validators/bookedSeatValidator');
-const scheduleValidator = require('./validators/scheduleValidator');
-const seatValidator = require('./validators/seatValidator');
-const bookingValidator = require('./validators/bookingValidator');
-const coachValidator = require('./validators/coachValidator');
-
-const { login } = require('./controllers/authController');
+const apiClientRoute = require('./routes/apiClientRoute');
+const apiAdminRoute = require('./routes/apiAdminRoute');
 
 
 
@@ -86,13 +61,12 @@ app.route('/amounts').get(allAmounts).post(storeAmount)
 app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 
 // Admin route
-app.route('/login').get((req, res)=>{}).post(login)
-app.route('/admins').get(allAdmins).post(storeAdmin)
-app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+// app.route('/login').get((req, res)=>{}).post(login)
+// app.route('/admins').get(allAdmins).post(storeAdmin)
+// app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
 app.route('/admins').get(allAdmins).post(storeAdmin)
 app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
-

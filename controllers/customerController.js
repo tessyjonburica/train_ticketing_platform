@@ -1,10 +1,12 @@
 const Customer = require("../models/Customer")
+const bcrypt = require('bcrypt')
 
 let storeCustomer = async (req, res) => {
     let customer = new Customer(req.body)
+    customer.password = bcrypt.hashSync(customer.password, 10);
     await customer.add()
     if (customer.id) {
-        res.send('Customer saved')
+        res.send('Customer saved Successfully')
     } else {
         res.send('Unable to save customer')
     }
