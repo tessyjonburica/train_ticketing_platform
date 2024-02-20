@@ -1,3 +1,6 @@
+const auth = require('../middleware/auth')
+const {Router} = require('express');
+const router = Router();
 const { allCoaches, storeCoach, findCoach, updateCoach, deleteCoach } = require('../controllers/coachController');
 const { allBookings, storeBooking, findBooking, updateBooking, deleteBooking } = require('../controllers/bookingController');
 const { allCustomers, storeCustomer, findCustomer, updateCustomer, deleteCustomer } = require('../controllers/customerController');
@@ -10,20 +13,17 @@ const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('../controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('../controllers/travelClassController');
 const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('../controllers/adminController');
+const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('../controllers/adminController');
 const customerValidator = require('../validators/customerValidator');
 const stationValidator = require('../validators/stationValidator');
 const fareValidator = require('../validators/fareValidator');
 const bookedSeatValidator = require('../validators/bookedSeatValidator');
 const scheduleValidator = require('../validators/scheduleValidator');
 const seatValidator = require('../validators/seatValidator');
-const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('../controllers/adminController');
 const bookingValidator = require('../validators/bookingValidator');
 const coachValidator = require('../validators/coachValidator');
 const {login} = require('../controllers/authcontroller');
-const auth = require('../middleware/auth')
-const {Router} = require('express');
 
-const router = Router();
 
 router.route('/login').get((req, res)=>{}).post(login)
 router.use(auth);
@@ -113,3 +113,4 @@ router.route('/amount/:id').get(findAmount).put(updateAmount).delete(deleteAmoun
 
 
 module.exports = router
+// ("http://localhost:3000/admin/bookings")
