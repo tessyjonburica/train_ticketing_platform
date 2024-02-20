@@ -17,16 +17,17 @@ const amountValidator = require('./validators/amountValidator');
 const trainValidator = require('./validators/trainValidator');
 const travelClassValidator = require('./validators/travelClassValidator');
 
-// const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
+const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const customerValidator = require('./validators/customerValidator');
 const stationValidator = require('./validators/stationValidator');
 const fareValidator = require('./validators/fareValidator');
 const bookedSeatValidator = require('./validators/bookedSeatValidator');
 const scheduleValidator = require('./validators/scheduleValidator');
 const seatValidator = require('./validators/seatValidator');
-const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('./controllers/adminController');
 const bookingValidator = require('./validators/bookingValidator');
 const coachValidator = require('./validators/coachValidator');
+
+const { login } = require('./controllers/authController');
 
 
 
@@ -85,9 +86,9 @@ app.route('/amounts').get(allAmounts).post(storeAmount)
 app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 
 // Admin route
-// app.route('/login').get((req, res)=>{}).post(login)
-// app.route('/admins').get(allAdmins).post(storeAdmin)
-// app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+app.route('/login').get((req, res)=>{}).post(login)
+app.route('/admins').get(allAdmins).post(storeAdmin)
+app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 
 app.route('/admins').get(allAdmins).post(storeAdmin)
