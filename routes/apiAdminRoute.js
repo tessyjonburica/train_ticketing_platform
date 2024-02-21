@@ -13,7 +13,6 @@ const { allTrains, storeTrain, findTrain, updateTrain, deleteTrain } = require('
 const { allAmounts, storeAmount, findAmount, updateAmount, deleteAmount } = require('../controllers/amountController');
 const { allTravelClasses, storeTravelClass, findTravelClass, updateTravelClass, deleteTravelClass } = require('../controllers/travelClassController');
 const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('../controllers/adminController');
-const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('../controllers/adminController');
 const customerValidator = require('../validators/customerValidator');
 const stationValidator = require('../validators/stationValidator');
 const fareValidator = require('../validators/fareValidator');
@@ -54,7 +53,7 @@ router.route('/schedules/:id').get(findSchedule).put(scheduleValidator,updateSch
 router.route('/seats').get(allSeats).post(seatValidator,storeSeat)
 router.route('/seats/:id').get(findSeat).put(seatValidator,updateSeat).delete(deleteSeat)
 
-router.get('/', (req, res) => res.send('Hello Swift Rails!'))
+// router.get('/', (req, res) => res.send('Hello Swift Rails!'))
 router.get('/', (req, res) => res.send(`Welcome, ${req.admin.name}`))
 
 
@@ -84,7 +83,6 @@ router.route('/amounts').get(allAmounts).post(storeAmount)
 router.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 
 // Admin route
-router.route('/login').get((req, res)=>{}).post(login)
 router.route('/admins').get(allAdmins).post(storeAdmin)
 router.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
@@ -101,10 +99,6 @@ router.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 router.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
 router.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 
-
-//trains route
-router.route('/trains').get(allTrains).post(storeTrain)
-router.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
 
 
 //Amount route

@@ -11,12 +11,12 @@ const { allTrains, findTrain } = require("../controllers/trainController");
 const { findAmount } = require("../controllers/amountController");
 const router = Router()
 const customerAuth = require("../middleware/customerAuth")
-
 const {customerLogin} = require('../controllers/customerAuthController')
+
 router.route('/login').get((req, res)=>{}).post(customerLogin)
 router.use(customerAuth);
-// coaches routes 
 
+// coaches routes 
 router.get("/coaches", allCoaches);
 router.get("/coaches/:id", findCoach);
 
