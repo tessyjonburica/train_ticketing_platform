@@ -8,10 +8,8 @@ const apiAdminRoute = require('./routes/apiAdminRoute');
 
 app.use(express.urlencoded({extended: true}));
 
-
-
-
 // app.use(apiClientRoute);
 app.use("/admin", apiAdminRoute);
+
 
 app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
