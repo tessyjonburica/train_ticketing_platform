@@ -28,6 +28,9 @@ const { allAdmins, storeAdmin, findAdmin, updateAdmin, deleteAdmin } = require('
 const bookingValidator = require('./validators/bookingValidator');
 const coachValidator = require('./validators/coachValidator');
 
+const { login } = require('./controllers/authController');
+
+
 
 
 app.use(express.urlencoded({extended: true}));
@@ -73,25 +76,23 @@ app.route('/booked-seats/:id').get(findBookedSeat).put(updateBookedSeat).delete(
 
 
 //trains route
-app.route('/trains').get(allTrains).post(storeTrain)
-app.route('/trains/:id').get(findTrain).put(updateTrain).delete(deleteTrain)
+app.route('/trains').get(allTrains).post(trainValidator, storeTrain)
+app.route('/trains/:id').get(findTrain).put(trainValidator, updateTrain).delete(deleteTrain)
 
 //travelclasses route
-app.route('/travelclasses').get(allTravelClasses).post(storeTravelClass)
-app.route('/travelclasses/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
+app.route('/travelclasses').get(allTravelClasses).post(travelClassValidator, storeTravelClass)
+app.route('/travelclasses/:id').get(findTravelClass).put(travelClassValidator, updateTravelClass).delete(deleteTravelClass)
 
 //Amount route
-app.route('/amounts').get(allAmounts).post(storeAmount)
-app.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
+app.route('/amounts').get(allAmounts).post(amountValidator, storeAmount)
+app.route('/amounts/:id').get(findAmount).put(amountValidator, updateAmount).delete(deleteAmount)
 
 // Admin route
-// app.route('/login').get((req, res)=>{}).post(login)
-// app.route('/admins').get(allAdmins).post(storeAdmin)
-// app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
-
-
+app.route('/login').get((req, res)=>{}).post(login)
 app.route('/admins').get(allAdmins).post(storeAdmin)
 app.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+
+
 
 app.listen(3000, ()=>console.log('server is listening on port 3000.\nvisit http://localhost:3000'))
 
