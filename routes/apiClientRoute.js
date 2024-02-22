@@ -16,6 +16,8 @@ const {customerLogin} = require('../controllers/customerAuthController')
 router.route('/login').get((req, res)=>{}).post(customerLogin)
 router.use(customerAuth);
 
+
+router.get('/', (req, res) => res.send(`Welcome, ${req.customer.firstName}`))
 // coaches routes 
 router.get("/coaches", allCoaches);
 router.get("/coaches/:id", findCoach);
@@ -25,8 +27,8 @@ router.get("/bookings/:id", findBooking);
 router.post("/bookings", storeBooking);
 
 // customer routes 
-router.get("/customers", findCustomer);
-router.put("/customers", updateCustomer);
+router.get("/customers/:id", findCustomer);
+router.put("/customers/:id", updateCustomer);
 
 // schedule routes
 router.get("/schedules", allSchedules);

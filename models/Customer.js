@@ -1,4 +1,5 @@
 const Model = require("./Model")
+const bcrypt = require('bcrypt')
 const connection = require("./connection")
 
 class Customer extends Model {

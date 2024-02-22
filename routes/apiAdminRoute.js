@@ -24,10 +24,9 @@ const coachValidator = require('../validators/coachValidator');
 const {login} = require('../controllers/authcontroller');
 
 
+
 router.route('/login').get((req, res)=>{}).post(login)
 router.use(auth);
-
-
 
 
 // Coach route
@@ -82,9 +81,7 @@ router.route('/travelclasses/:id').get(findTravelClass).put(updateTravelClass).d
 router.route('/amounts').get(allAmounts).post(storeAmount)
 router.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmount)
 
-// Admin route
-router.route('/admins').get(allAdmins).post(storeAdmin)
-router.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+
 
 
 //travelClasses route
