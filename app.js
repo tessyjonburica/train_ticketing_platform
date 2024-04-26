@@ -10,7 +10,6 @@ app.use(express.urlencoded({extended: true}));
 
 
 
-
 app.use("/admin", apiAdminRoute);
 app.use(apiClientRoute);
 

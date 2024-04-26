@@ -26,6 +26,11 @@ const {login} = require('../controllers/authcontroller');
 
 
 router.route('/login').get((req, res)=>{}).post(login)
+
+//Admins
+router.route('/admins').get(allAdmins).post(storeAdmin)
+router.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
+
 router.use(auth);
 
 
@@ -88,9 +93,6 @@ router.route('/amounts/:id').get(findAmount).put(updateAmount).delete(deleteAmou
 router.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
 router.route('/travel-class/:id').get(findTravelClass).put(updateTravelClass).delete(deleteTravelClass)
 
-
-router.route('/admins').get(allAdmins).post(storeAdmin)
-router.route('/admins/:id').get(findAdmin).put(updateAdmin).delete(deleteAdmin)
 
 //TravelClass route
 router.route('/travel-class').get(allTravelClasses).post(storeTravelClass)
